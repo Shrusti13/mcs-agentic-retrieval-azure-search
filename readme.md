@@ -67,6 +67,7 @@ sequenceDiagram
 - Azure AI Search service
 - Azure OpenAI service (or Azure AI Foundry project)
 - Python 3.8+
+- Power Platform license with add-on license for AI Hub (AI Builder) and Dataverse
 
 **⚠️ Important Azure Setup Requirements:**
 - Create Azure AI Search service and Foundry project in the same resource group
@@ -122,6 +123,25 @@ sequenceDiagram
    - Swagger UI: http://localhost:8000/docs
    - ReDoc: http://localhost:8000/redoc
 
+7. **Importing the Managed Solution**
+
+To manually import the solution, follow the steps below. The managed solution ZIP file is located in the `solution` folder of this repository.
+
+```
+Steps to Import:
+
+1. Navigate to your **Power Platform Environment** via [Power Apps](https://make.powerapps.com/).
+2. Go to **Solutions** from the left-hand menu.
+3. Click on **Import** in the command bar.
+4. Upload the solution ZIP file located in the `solution` folder of this repository.
+5. Ensure you're connected with the appropriate **user's connection** for all connectors used in the solution.
+6. Click **Import** to begin the process.
+7. Once the import completes, the managed solution will be available in your environment.
+
+```
+
+7. **Test the custom agent built in copilot studio and publish it the desired channel**
+
 ## API Endpoints
 
 ### Setup & Management
@@ -141,6 +161,13 @@ sequenceDiagram
 | `POST` | `/perform-agentic-retrieval` | Performs conversational search with automatic knowledge agent initialization |
 
 **API Documentation**: Complete request/response schemas and interactive testing available at `/docs`
+
+### Note : 
+
+Make sure this endpoint is accessible from your environment. If you plan to host your own instance of the API:
+1. Deploy the FastAPI app to your own Azure Web App or preferred hosting service.
+2. Update the **custom connector's base URL** in Power Apps to point to your new endpoint.
+3. Ensure any required environment variables or secrets are correctly configured in your hosting environment.
 
 ## Technical Details
 
