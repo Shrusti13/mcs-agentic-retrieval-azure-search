@@ -82,12 +82,14 @@ graph TB
 ```mermaid
 sequenceDiagram
     participant U as User
+    participant CS as Copilot Studio Agent
     participant API as FastAPI Server
     participant KA as Knowledge Agent
     participant AS as Azure Search
     participant LLM as Azure OpenAI
     
-    U->>API: POST /perform-agentic-retrieval
+    U->>CS: User asks complex insurance question
+    CS->>API: POST /perform-agentic-retrieval
     Note over API: Create Knowledge Agent if needed
     API->>KA: Create retrieval client
     API->>AS: Retrieve relevant documents
@@ -95,7 +97,8 @@ sequenceDiagram
     Note over API: Add to conversation context
     API->>LLM: Generate final response
     LLM-->>API: Return processed answer
-    API-->>U: Complete response with answer, context, activity, references
+    API-->>CS: Complete response with answer, context, activity, references
+    CS-->>U: Natural language response with source attribution
 ```
 
 ## Quick Start
